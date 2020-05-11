@@ -54,7 +54,7 @@ select_ThisProblemScope <- function(dataFrame) {
   ind1 <- which(str_detect(tolower(colnames(dataFrame)), "mean") == TRUE)
   ind2 <- which(str_detect(tolower(colnames(dataFrame)), "std") == TRUE)
 
-  cat("Debug Index1/2: ", length(ind1), length(ind2), "\n")
+  # cat("Debug Index1/2: ", length(ind1), length(ind2), "\n")
 
   X1 <- dataFrame[c(1, 2, ind1)]  # include SUBJECT, LABEL which are the first 2 columns
   X2 <- dataFrame[ind2]
@@ -71,42 +71,41 @@ select_ThisProblemScope <- function(dataFrame) {
 # ---------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------
 
-datasetSubfolder <- "UCI HAR Dataset"
-
 # ---------------------------------------------------------------------------------------
 # 1. Downloading and Unzipping
 # ---------------------------------------------------------------------------------------
-
 # let's download from the web source 
 fileUrl <-  "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip" 
-# NOTE: in my .gitignore I have:  
-#
-# Data/ds3_w4pga1_1.zip
-# Data/ds3_w4pga1_1_info.txt
-# Data/UCI HAR Dataset/ - see (NOTE 1*) below
-#
-
-destFile <- "Data/ds3_w4pga1_1.zip"
+# Web file to the problem will be downloaded as this one
+destFile <- "Data/ds3_w4pga1_1.zip"   
+# this fiel I personally want to have to keep track of history 
 infoFile <- "Data/ds3_w4pga1_1_info.txt"
 
 # --- download only if there is no file yet on hard drive
 if(!file.exists(destFile)) {
-    dir.create(file.path("Data"), showWarnings = FALSE)
-    print("Downloading local copy of dataset ZIP. Wait...")
+    # on Win platform we have to create a subfolder for the very first use
+    # if it does not exist yet; if it does exist, no bad things will happen 
+    dir.create(file.path("Data"), showWarnings = FALSE)  
+
+    print("Downloading local copy of dataset ZIP. Wait...")  # takes time 
     download.file(fileUrl, destfile= destFile)  # same naming convention as .R
-    dateDownloaded <- date()
+
+    # archive metadata
     # dateDownloaded etc - let's save for our own records
+    dateDownloaded <- date()
     write.table(df<- data.frame(dateDownloaded, fileUrl, destFile), file = infoFile, sep= ", ")
+
     print("...created local copy of dataset ZIP")
+
 } else {    # "else" must be on the same line as closing "}" from the "if"
     print("Using pre-downloaded local copy of dataset ZIP.")  
 }
 
-list.files()
+# list.files()
 
 # (NOTE 1*) UCI HAR Dataset will be created at the level as .R script
-if(!file.exists(datasetSubfolder)) {
-  print("Unzipping local copy of the dataset.")  
+if(!file.exists("UCI HAR Dataset")) {  # we know this name by looking into ZIP :-)
+  print("Unzipping local copy of the dataset.")  # takes time to unZIP
   debug_1 <- unzip(destFile, files = NULL, list = FALSE, overwrite = TRUE, 
             junkpaths = FALSE, exdir = ".", 
             unzip = "internal", setTimes = FALSE)
@@ -115,19 +114,21 @@ if(!file.exists(datasetSubfolder)) {
 }
 
 # ---------------------------------------------------------------------------------------
-# 2. Load training and test datasets + supportive names
+# 2. Load datasets and files in support
 # ---------------------------------------------------------------------------------------
+# --- load supportive info --------------------------------------------------------------
 features     <- read.table("UCI HAR Dataset/features.txt", stringsAsFactors= FALSE)
 # activities$V2 carries actual str-form names 
-activities   <- read.table("UCI HAR Dataset/activity_labels.txt", stringsAsFactors= FALSE)  
+activities <- read.table("UCI HAR Dataset/activity_labels.txt", stringsAsFactors= FALSE)  
 
 trainSubject <- read.table("UCI HAR Dataset/train/subject_train.txt")
 testSubject  <- read.table("UCI HAR Dataset/test/subject_test.txt")
-# get rid of 'data frame' representation - we are going to insert it as numerical values column
+# get rid of 'data frame' representation - we are going to insert it 
+# as numerical values column
 trainSubject <- as.numeric(unlist(trainSubject))
 testSubject <- as.numeric(unlist(testSubject))
 
-# --- load train and test datasets------------------------------------------------------
+# --- load now MAJOR train and test datasets---------------------------------------------
 print("Loading datasets...")
 trainData <- read.table("UCI HAR Dataset/train/X_train.txt")
 testData <- read.table("UCI HAR Dataset/test/X_test.txt")
@@ -140,43 +141,49 @@ trainLabel <- as.numeric(unlist(trainLabel))
 testLabel <- as.numeric(unlist(testLabel))
 
 # ---------------------------------------------------------------------------------------
-# 3. Merging 2 sets: training and test
+# 3. Adding subject and activity labels
 # ---------------------------------------------------------------------------------------
-
-# --- 3b First, add labels as a first column and then make sounding column names --------
-# --- 3b2 Add subject as 1st - was overlooked at first pass
-
 ## Mutate data frames by adding  columns
-trainData2 <- mutate(trainData, subject= trainSubject, label= trainLabel)    # give name "label" to the new column 
-# REF: https://stackoverflow.com/questions/22286419/move-a-column-to-first-position-in-a-data-frame
-trainData2<- select(trainData2, subject, label, everything())   # move this column to be the first one
+trainData2 <- mutate(trainData, subject= trainSubject, label= trainLabel)    
+testData2  <- mutate(testData, subject= testSubject, label= testLabel)    
 
-testData2 <- mutate(testData, subject= testSubject, label= testLabel)    
-testData2 <- select(testData2, subject, label, everything()) 
+# move the new columns to be the first ones
+trainData2 <- select(trainData2, subject, label, everything())   
+testData2  <- select(testData2, subject, label, everything()) 
 
+# make proper ordering - first by subject then by label= activities 
 testData2 <- arrange(testData2, subject, label)
 trainData2 <- arrange(trainData2, subject, label)
 
-# make meaningful column names 
-colnames(trainData2) <- c("SubjectNum", "Activity", features$V2)   # rename to fit the assignment 
+# make meaningful column names and rename to fit the assignment 
+colnames(trainData2) <- c("SubjectNum", "Activity", features$V2)   
 colnames(testData2) <- c("SubjectNum", "Activity", features$V2)   
 
-# --- 3c.2 - Do the merge of two pre-processed dataset ----------------------------------
+# ---------------------------------------------------------------------------------------
+# 4. Merging 2 sets
+# ---------------------------------------------------------------------------------------
 mergedData <- rbind(trainData2, testData2)
-selectedData <- select_ThisProblemScope(mergedData)
+
+# ---------------------------------------------------------------------------------------
+# 5. Pull out mean/std as requested by the assignment problem
+# ---------------------------------------------------------------------------------------
+selectedData <- select_ThisProblemScope(mergedData)   # see routine for the details
 
 s <- selectedData %>%
 	group_by(SubjectNum, Activity) %>%
 	summarise_each(funs(mean))
 
-options(pillar.sigfig = 9)  
-print(s)
+options(pillar.sigfig = 9)  # significant digits for print()
+# print(s)
 
-# replace numeric values w/ char names
-s$Activity <- activities[match(s$Activity, activities$V1), "V2"]   # "V2" holds names of activities ...
+# ---------------------------------------------------------------------------------------
+# 6. Make it all tidy!
+# ---------------------------------------------------------------------------------------
+# replace numeric values w/ char names for Activities 
+# "V2" holds names of activities ...
+s$Activity <- activities[match(s$Activity, activities$V1), "V2"]   
 
-# make column names tidy as well
-
+# make column names tidy as well, few actions here 
 # duplicates to be gone 
 names(s) <- gsub("BodyBody", "Body", x= names(s))
 # shorer name is OK to me personally but to be on a nerd wave :-) let's make fun replacing to the longer names
@@ -196,7 +203,9 @@ names(s) <- gsub("-std()",  "Std",        x= names(s), ignore.case = T)
 names(s) <- gsub("-freq()", "Frequency",  x= names(s), ignore.case = TRUE)
 names(s) <- gsub("[()]", "", names(s)) #, ignore.case = TRUE)
 
-# dump it now to the file!
+# ---------------------------------------------------------------------------------------
+# 7. Dump it now to the file! - Finally!
+# ---------------------------------------------------------------------------------------
 write.table(s[, 1:dim(s)[2]], file = "ds3_w4pga1_1_results.csv", sep= ",", row.names= FALSE, quote= F)
 
 ## --- THE END --------------------------------------------------------------------------
