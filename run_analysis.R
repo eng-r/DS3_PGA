@@ -191,17 +191,23 @@ names(s)<-gsub("Acc",  "Accelerometer", x= names(s))
 names(s)<-gsub("Gyro", "Gyroscope",     x= names(s))
 names(s)<-gsub("Mag",  "Magnitude",     x= names(s))
 # all which starts w/ t or f - let's change to Time/Frequency
-names(s) <- gsub("^t", "Time",      x= names(s))
+names(s) <- gsub("^t", "TimeDomain",      x= names(s))
 # names(s)<-gsub("tBody", "TimeBody", names(s))
-names(s) <- gsub("^f", "Frequency", x= names(s))
-# be consistent in upper/lower cases 
-names(s)<-gsub("angle", "Angle",     names(s))  # 'x' can be omited 
-names(s)<-gsub("gravity", "Gravity", names(s))
+names(s) <- gsub("^f", "FrequencyDomain", x= names(s))
+
 # all having () be replaced to more nice
 names(s) <- gsub("-mean()", "Mean",       x= names(s)) # , ignore.case = TRUE)
 names(s) <- gsub("-std()",  "Std",        x= names(s), ignore.case = T)
 names(s) <- gsub("-freq()", "Frequency",  x= names(s), ignore.case = TRUE)
 names(s) <- gsub("[()]", "", names(s)) #, ignore.case = TRUE)
+
+# be consistent in upper/lower cases 
+names(s) <- gsub("angle", "Angle",     names(s))  # 'x' can be omited 
+names(s) <- gsub("gravity", "Gravity", names(s))
+
+# for angles
+names(s) <- gsub("tBody", "TimeDomainBody", names(s))
+
 
 # ---------------------------------------------------------------------------------------
 # 7. Dump it now to the file! - Finally!

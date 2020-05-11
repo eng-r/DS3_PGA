@@ -53,6 +53,15 @@ All such measurements are classified within two important domains:
 - Time-domain captures of raw signals from accelerometer and gyroscope sensors 
 - Frequency-domain signals obtained after the FFT (Fast Fourier Transform) was performed over the time-domain signals [above]
 
+Additional ANGLE variables are made up according to the following:
+- Angles between two vectors; where additional vectors are obtained by averaging the signals in a signal window sample
+
+### TIME DOMAIN
+
+### FREQUENCY DOMAIN
+
+### ANGLES
+
 # Transformations/Pipelines
 
 # THE END
