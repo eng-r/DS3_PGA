@@ -65,6 +65,3 @@ Additional ANGLE variables are made up according to the following:
 # Transformations/Pipelines
 
 # THE END
-
-
-
