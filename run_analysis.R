@@ -48,29 +48,6 @@ library("magrittr") # The principal function provided by the magrittr package is
 # ---------------------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------------------
-# SANITY CHECK 
-# ---------------------------------------------------------------------------------------
-sanityCheck_AreFaturesUnique_ThisProblemScope <- function(dataFrame) {
-  ind <- which(duplicated(colnames(dataFrame)) == TRUE)
-  nonUniqueFeatures <- colnames(dataFrame)[ind]
-
-  # sanity check for _OUR TASK_
-  # Extracts only the measurements on the mean and standard deviation for each measurement.
-  L1 <- length(which(str_detect(tolower(nonUniqueFeatures), "mean")==TRUE))       # see "ThisProblemScope" :-)
-  L2 <- length(which(str_detect(tolower(nonUniqueFeatures), "std")==TRUE))
-
-  # REF: https://stackoverflow.com/questions/14577412/how-to-convert-variable-object-name-into-string
-  cat("Checking", deparse(substitute(dataFrame)))
-
-  # in this specifi case '&' and '&&' are both OK (!) - Warning though...
-  if(L1 == 0 && L2 == 0) {  # https://www.quora.com/What-is-the-difference-between-and-and-between-and-in-R
-     print("LUCKY YOU: mean AND standard deviation features [columns] are unique")
-  } else {
-     print("WARNING: non-unique mean OR standard deviation features [columns] are found")
-  }
-}
-
-# ---------------------------------------------------------------------------------------
 # RETURN DATAFRAME W/ MEAN/STD
 # ---------------------------------------------------------------------------------------
 select_ThisProblemScope <- function(dataFrame) {
@@ -183,12 +160,6 @@ trainData2 <- arrange(trainData2, subject, label)
 # make meaningful column names 
 colnames(trainData2) <- c("SubjectNum", "Activity", features$V2)   # rename to fit the assignment 
 colnames(testData2) <- c("SubjectNum", "Activity", features$V2)   
-
-# --- 3c Now, do the rest ---------------------------------------------------------------
-
-# --- 3c.1 - Sanity check first ---------------------------------------------------------
-sanityCheck_AreFaturesUnique_ThisProblemScope(trainData2)
-sanityCheck_AreFaturesUnique_ThisProblemScope(testData2)
 
 # --- 3c.2 - Do the merge of two pre-processed dataset ----------------------------------
 mergedData <- rbind(trainData2, testData2)
