@@ -60,22 +60,22 @@ Note that `.R script` is rather self-explanatory - it has sounding naming/wordin
 
 The solution script retrieves the original ZIPped dataset from Web and makes series of data processing steps [aka *transformations*]
 to obtain the requested final dataset. The steps described below are leading to the **tidy dataset** per the assignment 
-requirement. As mentioned, please use **Code Book** for details on transformation step. 
+requirement. As mentioned, please use **Code Book** for details on transformations/dataset names. 
 
 - Check if files exist on workstation and download/unzip source Web data if needed 
 - Pull-in [read] miscellaneous .TXT files to have training, test data and associated 'helper' activity, features, and subject info read as well 
-- As reqeusted, merge training and test datasets to obtain a single dataset
+- As requested, merge training and test datasets to obtain a single dataset
 - Manipulate with column and row names to make them descriptive and understandable by a human - "label" dataset
 - Extract only mean and standard deviation measurements as requested 
-- Per exercise, create a second independent tidy dataset (must be with *each* variable average value for each subject AND activity
+- Per exercise, create a second independent tidy dataset (must be with *each* variable average value for *each* subject AND *each* activity
 - Write the manipulated dataset to the `tidy_data.txt` file as requested 
 
 # Notes on reproducibility
 - The `tidy_data.txt` in this repository was created by running the `run_analysis.R` script
-- Used R version is R version 3.6.3 (2020-02-29)
+- Used R version is version 3.6.3 (2020-02-29) [snapshot on **10-May-2020**]
 - Platform: x86_64-w64-mingw32
 - R-Studio @ Windows 10 machine: Version 1.2.5042
-- other attached packages:
+- Attached packages used during the R-Studio session [you need to insatll them if you don't have it]:
 	- dplyr_0.8.5
 	- magrittr_1.5
 	- stringr_1.4.0
