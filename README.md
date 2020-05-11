@@ -1,4 +1,4 @@
-# DS3_PGA: Data Science - "Getting and Cleaning Data" by Johns Hopkins University. 
+# **DS3, Week 04, PGA**: Data Science - "Getting and Cleaning Data" by *Johns Hopkins University*. 
 
 <!--- https://atom.io/packages/markdown-preview ---> 
 <!--- Atom editor: Show the rendered HTML markdown to the right of the current editor using ctrl-shift-m ---> 
@@ -10,7 +10,7 @@ Peer-graded Assignment: Getting and Cleaning Data Course Project.
 https://www.coursera.org/learn/data-cleaning/peer/FIZtT/getting-and-cleaning-data-course-project
 
 ## Overview
-One of exciting areas in data science today is wearable computing - see for example [this article (link checked on 10-May-2020)](https://www.itnews.com/article/2115126/big-data--activity-tracking--and-the-battle-for-the-world-s-top-sports-brand.html). 
+One of exciting areas in data science today is wearable computing - see for example this article: [*Big data, activity tracking, and the battle for the world's top sports brand*](https://www.itnews.com/article/2115126/big-data--activity-tracking--and-the-battle-for-the-world-s-top-sports-brand.html) [link checked on 10-May-2020]. 
 Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users.
 
 In this project, data collected from accelerometers and gyroscopes of the Samsung Galaxy S smartphone were retrieved, cleaned, 
