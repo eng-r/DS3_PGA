@@ -4,10 +4,11 @@
 <!--- Atom editor: Show the rendered HTML markdown to the right of the current editor using ctrl-shift-m ---> 
 
 
-[Data Science - 3rd Course: "Getting and Cleaning Data" by Johns Hopkins University](https://www.coursera.org/learn/data-cleaning/ "Getting and Cleaning Data") [https://www.coursera.org/learn/data-cleaning/]
+[Data Science - 3rd Course: "Getting and Cleaning Data" by Johns Hopkins University](https://www.coursera.org/learn/data-cleaning/ "Getting and Cleaning Data").
+Explicit link: https://www.coursera.org/learn/data-cleaning/
 
-Peer-graded Assignment: Getting and Cleaning Data Course Project.
-https://www.coursera.org/learn/data-cleaning/peer/FIZtT/getting-and-cleaning-data-course-project
+Peer-Graded Assignment [**PGA**]: Getting and Cleaning Data Course Project. 
+Explicit link: https://www.coursera.org/learn/data-cleaning/peer/FIZtT/getting-and-cleaning-data-course-project
 
 ## Overview
 One of exciting areas in data science today is wearable computing - see for example this article: [*Big data, activity tracking, and the battle for the world's top sports brand*](https://www.itnews.com/article/2115126/big-data--activity-tracking--and-the-battle-for-the-world-s-top-sports-brand.html) [link checked on 10-May-2020]. 
