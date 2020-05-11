@@ -206,6 +206,6 @@ names(s) <- gsub("[()]", "", names(s)) #, ignore.case = TRUE)
 # ---------------------------------------------------------------------------------------
 # 7. Dump it now to the file! - Finally!
 # ---------------------------------------------------------------------------------------
-write.table(s[, 1:dim(s)[2]], file = "ds3_w4pga1_1_results.csv", sep= ",", row.names= FALSE, quote= F)
+write.table(s[, 1:dim(s)[2]], file = "tidy_data.txt", sep= " ", row.names= FALSE, quote= F)
 
 ## --- THE END --------------------------------------------------------------------------
