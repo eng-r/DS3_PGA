@@ -37,3 +37,7 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# 10-May-2020
+Data/
+UCI HAR Dataset/
