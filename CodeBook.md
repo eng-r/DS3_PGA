@@ -57,57 +57,145 @@ Additional ANGLE variables are made up according to the following:
 - Angles between two vectors; where additional vectors are obtained by averaging the signals in a signal window sample
 - NOTE: removed from final submission as angles themselves ARE NOT mean/std
 
-### TIME DOMAIN
- [3] "TimeDomainBodyAccelerometerMeanX"                      "TimeDomainBodyAccelerometerMeanY"                     
- [5] "TimeDomainBodyAccelerometerMeanZ"                      "TimeDomainGravityAccelerometerMeanX"                  
- [7] "TimeDomainGravityAccelerometerMeanY"                   "TimeDomainGravityAccelerometerMeanZ"                  
- [9] "TimeDomainBodyAccelerometerJerkMeanX"                  "TimeDomainBodyAccelerometerJerkMeanY"                 
-[11] "TimeDomainBodyAccelerometerJerkMeanZ"                  "TimeDomainBodyGyroscopeMeanX"                         
-[13] "TimeDomainBodyGyroscopeMeanY"                          "TimeDomainBodyGyroscopeMeanZ"                         
-[15] "TimeDomainBodyGyroscopeJerkMeanX"                      "TimeDomainBodyGyroscopeJerkMeanY"                     
-[17] "TimeDomainBodyGyroscopeJerkMeanZ"                      "TimeDomainBodyAccelerometerMagnitudeMean"             
-[19] "TimeDomainGravityAccelerometerMagnitudeMean"           "TimeDomainBodyAccelerometerJerkMagnitudeMean"         
-[21] "TimeDomainBodyGyroscopeMagnitudeMean"                  "TimeDomainBodyGyroscopeJerkMagnitudeMean"             
+## NOTES on Terminology
+- Accelerometer sensor measures acceleration
+- Gyroscope sensor measures angular velocity
+- Body acceleration vs Gravity acceleration - see "Jorge-Luis Reyes-Ortiz book @ Google search"
+    - In brief: gravitational and body motion components from the sensor acceleration signal were separated via Butterworth 
+low-pass filter into body acceleration and gravity [page 294 of "Depp Learning with TenzorFlow" 2nd Edition, by G. Zaccone and Md. R. Karim - Packt> edition]
+- Jerk is a derivation of the acceleration in time
+- Magnitude of acceleration vs Acceleration [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6566970/]
+    - Acceleration is defined as the time rate of change of velocity. Since velocity has both magnitude and direction, so does acceleration. In other words, 
+acceleration is a vector. The length of the vector is its magnitude. Its direction is the direction of the vector 
+    - So the magnitude of acceleration is the magnitude of the acceleration vector while the direction of the acceleration is the direction of the acceleration vector
 
-[49] "TimeDomainBodyAccelerometerStdX"                       "TimeDomainBodyAccelerometerStdY"                      
-[51] "TimeDomainBodyAccelerometerStdZ"                       "TimeDomainGravityAccelerometerStdX"                   
-[53] "TimeDomainGravityAccelerometerStdY"                    "TimeDomainGravityAccelerometerStdZ"                   
-[55] "TimeDomainBodyAccelerometerJerkStdX"                   "TimeDomainBodyAccelerometerJerkStdY"                  
-[57] "TimeDomainBodyAccelerometerJerkStdZ"                   "TimeDomainBodyGyroscopeStdX"                          
-[59] "TimeDomainBodyGyroscopeStdY"                           "TimeDomainBodyGyroscopeStdZ"                          
-[61] "TimeDomainBodyGyroscopeJerkStdX"                       "TimeDomainBodyGyroscopeJerkStdY"                      
-[63] "TimeDomainBodyGyroscopeJerkStdZ"                       "TimeDomainBodyAccelerometerMagnitudeStd"              
-[65] "TimeDomainGravityAccelerometerMagnitudeStd"            "TimeDomainBodyAccelerometerJerkMagnitudeStd"          
-[67] "TimeDomainBodyGyroscopeMagnitudeStd"                   "TimeDomainBodyGyroscopeJerkMagnitudeStd"              
+### TIME DOMAIN
+#### Time-Domain Averages (Means)
+- Mean of body acceleration, X/Y/Z directions
+   - TimeDomainBodyAccelerometerMeanX
+   - TimeDomainBodyAccelerometerMeanY 
+   - TimeDomainBodyAccelerometerMeanZ 
+
+- Mean of gravity acceleration, X/Y/Z directions
+   - TimeDomainGravityAccelerometerMeanX
+   - TimeDomainGravityAccelerometerMeanY
+   - TimeDomainGravityAccelerometerMeanZ
+
+- Mean of body acceleration jerk, X/Y/Z directions
+   - TimeDomainBodyAccelerometerJerkMeanX
+   - TimeDomainBodyAccelerometerJerkMeanY
+   - TimeDomainBodyAccelerometerJerkMeanZ
+
+- Mean of body angular velocity, X/Y/Z directions
+   - TimeDomainBodyGyroscopeMeanX
+   - TimeDomainBodyGyroscopeMeanY
+   - TimeDomainBodyGyroscopeMeanZ
+
+- Mean of jerk of body angular velocity, X/Y/Z directions
+   - TimeDomainBodyGyroscopeJerkMeanX
+   - TimeDomainBodyGyroscopeJerkMeanY
+   - TimeDomainBodyGyroscopeJerkMeanZ
+
+- Mean of magnitude of body acceleration
+   - TimeDomainBodyAccelerometerMagnitudeMean
+
+- Mean of magnitude of gravity acceleration
+   - TimeDomainGravityAccelerometerMagnitudeMean
+
+- Mean of magnitude of jerk of body acceleration
+   - TimeDomainBodyAccelerometerJerkMagnitudeMean
+
+- Mean of magnitude of of body angular velocity
+   - TimeDomainBodyGyroscopeMagnitudeMean
+
+- Mean of magnitude of jerk of body body angular velocity
+   - TimeDomainBodyGyroscopeJerkMagnitudeMean
+
+#### Time-Domain Standard Deviations (STD)
+Plase refer to the above "Average" chapter and substitute Std with Mean. Otherwise, it is a very similar channels description
+
+   - TimeDomainBodyAccelerometerStdX 
+   - TimeDomainBodyAccelerometerStdY 
+   - TimeDomainBodyAccelerometerStdZ 
+   - TimeDomainGravityAccelerometerStdX
+   - TimeDomainGravityAccelerometerStdY
+   - TimeDomainGravityAccelerometerStdZ
+   - TimeDomainBodyAccelerometerJerkStdX
+   - TimeDomainBodyAccelerometerJerkStdY
+   - TimeDomainBodyAccelerometerJerkStdZ
+   - TimeDomainBodyGyroscopeStdX
+   - TimeDomainBodyGyroscopeStdY
+   - TimeDomainBodyGyroscopeStdZ
+   - TimeDomainBodyGyroscopeJerkStdX
+   - TimeDomainBodyGyroscopeJerkStdY
+   - TimeDomainBodyGyroscopeJerkStdZ
+   - TimeDomainBodyAccelerometerMagnitudeStd
+   - TimeDomainGravityAccelerometerMagnitudeStd
+   - TimeDomainBodyAccelerometerJerkMagnitudeStd
+   - TimeDomainBodyGyroscopeMagnitudeStd
+   - TimeDomainBodyGyroscopeJerkMagnitudeStd
 
 ### FREQUENCY DOMAIN
+Plase refer to the above "Time-Domain" chapters and substitute TimeDomain with FrequencyDomain. Otherwise, it is a very similar channels description
 
-[23] "FrequencyDomainBodyAccelerometerMeanX"                 "FrequencyDomainBodyAccelerometerMeanY"                
-[25] "FrequencyDomainBodyAccelerometerMeanZ"                 "FrequencyDomainBodyAccelerometerMeanFreqX"            
-[27] "FrequencyDomainBodyAccelerometerMeanFreqY"             "FrequencyDomainBodyAccelerometerMeanFreqZ"            
-[29] "FrequencyDomainBodyAccelerometerJerkMeanX"             "FrequencyDomainBodyAccelerometerJerkMeanY"            
-[31] "FrequencyDomainBodyAccelerometerJerkMeanZ"             "FrequencyDomainBodyAccelerometerJerkMeanFreqX"        
-[33] "FrequencyDomainBodyAccelerometerJerkMeanFreqY"         "FrequencyDomainBodyAccelerometerJerkMeanFreqZ"        
-[35] "FrequencyDomainBodyGyroscopeMeanX"                     "FrequencyDomainBodyGyroscopeMeanY"                    
-[37] "FrequencyDomainBodyGyroscopeMeanZ"                     "FrequencyDomainBodyGyroscopeMeanFreqX"                
-[39] "FrequencyDomainBodyGyroscopeMeanFreqY"                 "FrequencyDomainBodyGyroscopeMeanFreqZ"                
-[41] "FrequencyDomainBodyAccelerometerMagnitudeMean"         "FrequencyDomainBodyAccelerometerMagnitudeMeanFreq"    
-[43] "FrequencyDomainBodyAccelerometerJerkMagnitudeMean"     "FrequencyDomainBodyAccelerometerJerkMagnitudeMeanFreq"
-[45] "FrequencyDomainBodyGyroscopeMagnitudeMean"             "FrequencyDomainBodyGyroscopeMagnitudeMeanFreq"        
-[47] "FrequencyDomainBodyGyroscopeJerkMagnitudeMean"         "FrequencyDomainBodyGyroscopeJerkMagnitudeMeanFreq"    
+   - FrequencyDomainBodyAccelerometerMeanX
+   - FrequencyDomainBodyAccelerometerMeanY
+   - FrequencyDomainBodyAccelerometerMeanZ
+   - FrequencyDomainBodyAccelerometerMeanFreqX
+   - FrequencyDomainBodyAccelerometerMeanFreqY
+   - FrequencyDomainBodyAccelerometerMeanFreqZ
+   - FrequencyDomainBodyAccelerometerJerkMeanX
+   - FrequencyDomainBodyAccelerometerJerkMeanY
+   - FrequencyDomainBodyAccelerometerJerkMeanZ
+   - FrequencyDomainBodyAccelerometerJerkMeanFreqX
+   - FrequencyDomainBodyAccelerometerJerkMeanFreqY
+   - FrequencyDomainBodyAccelerometerJerkMeanFreqZ
+   - FrequencyDomainBodyGyroscopeMeanX
+   - FrequencyDomainBodyGyroscopeMeanY 
+   - FrequencyDomainBodyGyroscopeMeanZ 
+   - FrequencyDomainBodyGyroscopeMeanFreqX
+   - FrequencyDomainBodyGyroscopeMeanFreqY
+   - FrequencyDomainBodyGyroscopeMeanFreqZ
+   - FrequencyDomainBodyAccelerometerMagnitudeMean
+   - FrequencyDomainBodyAccelerometerMagnitudeMeanFreq 
+   - FrequencyDomainBodyAccelerometerJerkMagnitudeMean 
+   - FrequencyDomainBodyAccelerometerJerkMagnitudeMeanFreq
+   - FrequencyDomainBodyGyroscopeMagnitudeMean
+   - FrequencyDomainBodyGyroscopeMagnitudeMeanFreq
+   - FrequencyDomainBodyGyroscopeJerkMagnitudeMean
+   - FrequencyDomainBodyGyroscopeJerkMagnitudeMeanFreq
 
-[69] "FrequencyDomainBodyAccelerometerStdX"                  "FrequencyDomainBodyAccelerometerStdY"                 
-[71] "FrequencyDomainBodyAccelerometerStdZ"                  "FrequencyDomainBodyAccelerometerJerkStdX"             
-[73] "FrequencyDomainBodyAccelerometerJerkStdY"              "FrequencyDomainBodyAccelerometerJerkStdZ"             
-[75] "FrequencyDomainBodyGyroscopeStdX"                      "FrequencyDomainBodyGyroscopeStdY"                     
-[77] "FrequencyDomainBodyGyroscopeStdZ"                      "FrequencyDomainBodyAccelerometerMagnitudeStd"         
-[79] "FrequencyDomainBodyAccelerometerJerkMagnitudeStd"      "FrequencyDomainBodyGyroscopeMagnitudeStd"             
-[81] "FrequencyDomainBodyGyroscopeJerkMagnitudeStd"         
-
+   - FrequencyDomainBodyAccelerometerStdX
+   - FrequencyDomainBodyAccelerometerStdY
+   - FrequencyDomainBodyAccelerometerStdZ
+   - FrequencyDomainBodyAccelerometerJerkStdX
+   - FrequencyDomainBodyAccelerometerJerkStdY
+   - FrequencyDomainBodyAccelerometerJerkStdZ
+   - FrequencyDomainBodyGyroscopeStdX
+   - FrequencyDomainBodyGyroscopeStdY
+   - FrequencyDomainBodyGyroscopeStdZ
+   - FrequencyDomainBodyAccelerometerMagnitudeStd
+   - FrequencyDomainBodyAccelerometerJerkMagnitudeStd
+   - FrequencyDomainBodyGyroscopeMagnitudeStd
+   - FrequencyDomainBodyGyroscopeJerkMagnitudeStd
 
 ### ANGLES
- [REMOVED] from the final submission - they are not 'mean/std' angles.
+ [REMOVED] from the final submission    - they are not 'mean/std' angles.
 
 # Transformations/Pipelines
+Gathering/processing of the orignal datasets plus the requires transformations are coded in run_analysis.R R-script
+
+A link to the source data file is given in the run_analysis.R script. The script applies transformations listed below: 
+
+- Download and unZIP if no copies exist on your workstation
+- From unZipped folder, load major datasets AND supplementary files such as 'features' to help the workflow coding 
+- Amend training and test datasets with Subject and Activity labels
+- Merge training and test datasets --> a single data set is created 
+- Pull out mean/std as requested by the assignment problem. [NOTE] - ignore angles
+   - Create requested dataset with the average for each Variable grouped for each Activity and each Subject
+- Make names tidy [descriptive and "good" names]
+- Save results to the requested file
+
+Please see README.md file for more details.
 
 # THE END
