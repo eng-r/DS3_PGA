@@ -240,6 +240,7 @@ names(s) <- gsub("tBody", "TimeDomainBody", names(s))
 # 7. Dump it now to the file! - Finally!
 # ---------------------------------------------------------------------------------------
 write.table(s[, 1:dim(s)[2]], file = "tidy_data.txt", sep= " ", row.names= FALSE, quote= F)
+write.table(s[, 1:dim(s)[2]], file = "tidy_data.csv", sep= ",", row.names= FALSE, quote= F)
 
 # save reference file for code book - names
 sink("names.txt")

@@ -37,13 +37,13 @@ Each row contains 88-2= 86 averaged mean/std  measurements, for a given subject 
 ## Identifiers 
 - `SubjectNum` - subject ID, integer, ranges from 1 to 30
 	- NOTE: 'subject' is a human :-)
-- `Activity` - activity identifier, string with one of 6 values: 
-	- `WALKING`: subject was walking
-	- `WALKING_UPSTAIRS`: subject was walking upstairs
-	- `WALKING_DOWNSTAIRS`: subject was walking downstairs
-	- `SITTING`: subject was sitting
-	- `STANDING`: subject was standing
-	- `LAYING`: subject was laying
+- `Activity` - activity identifier, a string with one of 6 values: 
+	- `WALKING`: subject walking
+	- `WALKING_UPSTAIRS`: subject walking upstairs
+	- `WALKING_DOWNSTAIRS`: subject walking downstairs
+	- `SITTING`: subject sitting
+	- `STANDING`: subject standing
+	- `LAYING`: subject laying
 
 ## Measurements/Averages
 What are `Averages` ? - All measurements are values in their double floating point representation, normalised within [-1, 1] range (aka per-unit-value). 
@@ -55,12 +55,58 @@ All such measurements are classified within two important domains:
 
 Additional ANGLE variables are made up according to the following:
 - Angles between two vectors; where additional vectors are obtained by averaging the signals in a signal window sample
+- NOTE: removed from final submission as angles themselves ARE NOT mean/std
 
 ### TIME DOMAIN
+ [3] "TimeDomainBodyAccelerometerMeanX"                      "TimeDomainBodyAccelerometerMeanY"                     
+ [5] "TimeDomainBodyAccelerometerMeanZ"                      "TimeDomainGravityAccelerometerMeanX"                  
+ [7] "TimeDomainGravityAccelerometerMeanY"                   "TimeDomainGravityAccelerometerMeanZ"                  
+ [9] "TimeDomainBodyAccelerometerJerkMeanX"                  "TimeDomainBodyAccelerometerJerkMeanY"                 
+[11] "TimeDomainBodyAccelerometerJerkMeanZ"                  "TimeDomainBodyGyroscopeMeanX"                         
+[13] "TimeDomainBodyGyroscopeMeanY"                          "TimeDomainBodyGyroscopeMeanZ"                         
+[15] "TimeDomainBodyGyroscopeJerkMeanX"                      "TimeDomainBodyGyroscopeJerkMeanY"                     
+[17] "TimeDomainBodyGyroscopeJerkMeanZ"                      "TimeDomainBodyAccelerometerMagnitudeMean"             
+[19] "TimeDomainGravityAccelerometerMagnitudeMean"           "TimeDomainBodyAccelerometerJerkMagnitudeMean"         
+[21] "TimeDomainBodyGyroscopeMagnitudeMean"                  "TimeDomainBodyGyroscopeJerkMagnitudeMean"             
+
+[49] "TimeDomainBodyAccelerometerStdX"                       "TimeDomainBodyAccelerometerStdY"                      
+[51] "TimeDomainBodyAccelerometerStdZ"                       "TimeDomainGravityAccelerometerStdX"                   
+[53] "TimeDomainGravityAccelerometerStdY"                    "TimeDomainGravityAccelerometerStdZ"                   
+[55] "TimeDomainBodyAccelerometerJerkStdX"                   "TimeDomainBodyAccelerometerJerkStdY"                  
+[57] "TimeDomainBodyAccelerometerJerkStdZ"                   "TimeDomainBodyGyroscopeStdX"                          
+[59] "TimeDomainBodyGyroscopeStdY"                           "TimeDomainBodyGyroscopeStdZ"                          
+[61] "TimeDomainBodyGyroscopeJerkStdX"                       "TimeDomainBodyGyroscopeJerkStdY"                      
+[63] "TimeDomainBodyGyroscopeJerkStdZ"                       "TimeDomainBodyAccelerometerMagnitudeStd"              
+[65] "TimeDomainGravityAccelerometerMagnitudeStd"            "TimeDomainBodyAccelerometerJerkMagnitudeStd"          
+[67] "TimeDomainBodyGyroscopeMagnitudeStd"                   "TimeDomainBodyGyroscopeJerkMagnitudeStd"              
 
 ### FREQUENCY DOMAIN
 
+[23] "FrequencyDomainBodyAccelerometerMeanX"                 "FrequencyDomainBodyAccelerometerMeanY"                
+[25] "FrequencyDomainBodyAccelerometerMeanZ"                 "FrequencyDomainBodyAccelerometerMeanFreqX"            
+[27] "FrequencyDomainBodyAccelerometerMeanFreqY"             "FrequencyDomainBodyAccelerometerMeanFreqZ"            
+[29] "FrequencyDomainBodyAccelerometerJerkMeanX"             "FrequencyDomainBodyAccelerometerJerkMeanY"            
+[31] "FrequencyDomainBodyAccelerometerJerkMeanZ"             "FrequencyDomainBodyAccelerometerJerkMeanFreqX"        
+[33] "FrequencyDomainBodyAccelerometerJerkMeanFreqY"         "FrequencyDomainBodyAccelerometerJerkMeanFreqZ"        
+[35] "FrequencyDomainBodyGyroscopeMeanX"                     "FrequencyDomainBodyGyroscopeMeanY"                    
+[37] "FrequencyDomainBodyGyroscopeMeanZ"                     "FrequencyDomainBodyGyroscopeMeanFreqX"                
+[39] "FrequencyDomainBodyGyroscopeMeanFreqY"                 "FrequencyDomainBodyGyroscopeMeanFreqZ"                
+[41] "FrequencyDomainBodyAccelerometerMagnitudeMean"         "FrequencyDomainBodyAccelerometerMagnitudeMeanFreq"    
+[43] "FrequencyDomainBodyAccelerometerJerkMagnitudeMean"     "FrequencyDomainBodyAccelerometerJerkMagnitudeMeanFreq"
+[45] "FrequencyDomainBodyGyroscopeMagnitudeMean"             "FrequencyDomainBodyGyroscopeMagnitudeMeanFreq"        
+[47] "FrequencyDomainBodyGyroscopeJerkMagnitudeMean"         "FrequencyDomainBodyGyroscopeJerkMagnitudeMeanFreq"    
+
+[69] "FrequencyDomainBodyAccelerometerStdX"                  "FrequencyDomainBodyAccelerometerStdY"                 
+[71] "FrequencyDomainBodyAccelerometerStdZ"                  "FrequencyDomainBodyAccelerometerJerkStdX"             
+[73] "FrequencyDomainBodyAccelerometerJerkStdY"              "FrequencyDomainBodyAccelerometerJerkStdZ"             
+[75] "FrequencyDomainBodyGyroscopeStdX"                      "FrequencyDomainBodyGyroscopeStdY"                     
+[77] "FrequencyDomainBodyGyroscopeStdZ"                      "FrequencyDomainBodyAccelerometerMagnitudeStd"         
+[79] "FrequencyDomainBodyAccelerometerJerkMagnitudeStd"      "FrequencyDomainBodyGyroscopeMagnitudeStd"             
+[81] "FrequencyDomainBodyGyroscopeJerkMagnitudeStd"         
+
+
 ### ANGLES
+ [REMOVED] from the final submission - they are not 'mean/std' angles.
 
 # Transformations/Pipelines
 
