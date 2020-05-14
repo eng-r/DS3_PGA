@@ -10,7 +10,7 @@
 ##
 ## Author:  oseng, https://github.com/eng-r
 ## Contact: <public e-mail> 51923315+eng-r@users.noreply.github.com
-## Date:    01-May ... 09, 10-May-2020 [Wrap up on 10-May-2020]
+## Date:    01-May ... 09, 10-May-2020 [Wrap up on 10...14-May-2020]
 ## Version: 0.2c
 ## --------------------------------------------------------------------------------------
 
@@ -51,8 +51,29 @@ library("magrittr") # The principal function provided by the magrittr package is
 # RETURN DATAFRAME W/ MEAN/STD
 # ---------------------------------------------------------------------------------------
 select_ThisProblemScope <- function(dataFrame) {
-  ind1 <- which(str_detect(tolower(colnames(dataFrame)), "mean") == TRUE)
-  ind2 <- which(str_detect(tolower(colnames(dataFrame)), "std") == TRUE)
+  # noted after final run that angle should not be actually there - though it may 
+  # have mean/std as an argument BUT it is not the mean/std of an angle :-)
+
+  tmp <- tolower(colnames(dataFrame))
+
+  # see features.txt - e.g. 555 angle(tBodyAccMean,gravity)
+  # these should be excluded I think
+  "
+    555 angle(tBodyAccMean,gravity)
+    556 angle(tBodyAccJerkMean),gravityMean)
+    557 angle(tBodyGyroMean,gravityMean)
+    558 angle(tBodyGyroJerkMean,gravityMean)
+    559 angle(X,gravityMean)
+    560 angle(Y,gravityMean)
+    561 angle(Z,gravityMean)
+  "
+
+  ind1 <- which(str_detect(tmp, "mean") == TRUE &
+                str_detect(tmp, "angle") == FALSE)
+  # TODO: check below
+  # length(grep("^angle", tmp)) == 0)   # exclude names _starting_ with 'angle' 
+
+  ind2 <- which(str_detect(tmp, "std") == TRUE)
 
   # cat("Debug Index1/2: ", length(ind1), length(ind2), "\n")
 
@@ -191,15 +212,21 @@ names(s)<-gsub("Acc",  "Accelerometer", x= names(s))
 names(s)<-gsub("Gyro", "Gyroscope",     x= names(s))
 names(s)<-gsub("Mag",  "Magnitude",     x= names(s))
 # all which starts w/ t or f - let's change to Time/Frequency
-names(s) <- gsub("^t", "TimeDomain",      x= names(s))
+names(s) <- gsub("^t", "TimeDomain",      x= names(s))   # ! maybe too crazy long 
 # names(s)<-gsub("tBody", "TimeBody", names(s))
-names(s) <- gsub("^f", "FrequencyDomain", x= names(s))
+names(s) <- gsub("^f", "FrequencyDomain", x= names(s))   # ! maybe too crazy long 
 
 # all having () be replaced to more nice
 names(s) <- gsub("-mean()", "Mean",       x= names(s)) # , ignore.case = TRUE)
 names(s) <- gsub("-std()",  "Std",        x= names(s), ignore.case = T)
 names(s) <- gsub("-freq()", "Frequency",  x= names(s), ignore.case = TRUE)
-names(s) <- gsub("[()]", "", names(s)) #, ignore.case = TRUE)
+#names(s) <- gsub("[()]", "", names(s)) #, ignore.case = TRUE)
+#names(s) <- gsub("()", "", names(s)) #, ignore.case = TRUE)
+
+# 13-May-2020: to make e.g. TimeDomainBodyAccelerometerMeanX out of
+#                           TimeDomainBodyAccelerometerMean()-X
+names(s) <- gsub("\\()-", "", x= names(s)) 
+names(s) <- gsub("\\()", "", x= names(s)) 
 
 # be consistent in upper/lower cases 
 names(s) <- gsub("angle", "Angle",     names(s))  # 'x' can be omited 
@@ -213,5 +240,10 @@ names(s) <- gsub("tBody", "TimeDomainBody", names(s))
 # 7. Dump it now to the file! - Finally!
 # ---------------------------------------------------------------------------------------
 write.table(s[, 1:dim(s)[2]], file = "tidy_data.txt", sep= " ", row.names= FALSE, quote= F)
+
+# save reference file for code book - names
+sink("names.txt")
+print(names(s))
+sink()
 
 ## --- THE END --------------------------------------------------------------------------
