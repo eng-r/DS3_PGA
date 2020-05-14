@@ -25,12 +25,12 @@ The chapters herein are:
 	- The very first row has variable names, please see "Variables" chapter below
 	- The rest of rows keeps values [observations] of the variables in columns [features]
 	- IMPORTANT: the first column is "SubjectNum" - an abstract person ID
-	- IMPORTANT: the second column is "Activity" - I call it 'feature' or 'label'
+	- IMPORTANT: the second column is "Activity" [I call it "label"]
 
 # Variables
 NOTE: to obtain names of variables in the output dataset [after you run `run_analysis.R`], you can type/run *names(s)* in R-Studio console. It will yield list of names discussed herein.
 
-Each row contains 88-2= 86 averaged mean/std  measurements, for a given subject and activity.
+Each row contains 81-2= 79 averaged mean/std  measurements, for a given subject and activity.
 
 ## Identifiers 
 - `SubjectNum` - subject ID, integer, ranges from 1 to 30
@@ -51,16 +51,16 @@ All such measurements are classified within two important domains:
 - Time-domain captures of raw signals from accelerometer and gyroscope sensors 
 - Frequency-domain signals obtained after the FFT (Fast Fourier Transform) was performed over the time-domain signals [above]
 
-Additional ANGLE variables are made up according to the following:
-- Angles between two vectors; where additional vectors are obtained by averaging the signals in a signal window sample
-- NOTE: removed from final submission as angles themselves ARE NOT mean/std
+Additional **ANGLE** variables are made up according to the following:
+- Angles between two vectors; where vector(s) are obtained by averaging the signals 
+- NOTE: **removed** from final submission as angles themselves ARE NOT mean/std
 
 ## NOTES on Terminology
 - Accelerometer sensor measures acceleration
 - Gyroscope sensor measures angular velocity
-- Body acceleration vs Gravity acceleration - see "Jorge-Luis Reyes-Ortiz book @ Google search"
+- Body acceleration vs Gravity acceleration - see "Jorge-Luis Reyes-Ortiz book @ Google book read [google for it]"
     - In brief: gravitational and body motion components from the sensor acceleration signal were separated via Butterworth 
-low-pass filter into body acceleration and gravity [page 294 of "Depp Learning with TenzorFlow" 2nd Edition, by G. Zaccone and Md. R. Karim - Packt> edition]
+low-pass filter into body acceleration and gravity [page 294 of "Deep Learning with TenzorFlow" 2nd Edition, by G. Zaccone and Md. R. Karim, the Packt> edition]
 - Jerk is a derivation of the acceleration in time
 - Magnitude of acceleration vs Acceleration [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6566970/]
     - Acceleration is defined as the time rate of change of velocity. Since velocity has both magnitude and direction, so does acceleration. In other words, 
@@ -109,7 +109,7 @@ acceleration is a vector. The length of the vector is its magnitude. Its directi
 - Mean of magnitude of jerk of body body angular velocity
    - TimeDomainBodyGyroscopeJerkMagnitudeMean
 
-#### Time-Domain Standard Deviations (STD)
+#### Time-Domain Standard Deviations (Std)
 Plase refer to the above "Average" chapter and substitute Std with Mean. Otherwise, it is a very similar channels description
 
    - TimeDomainBodyAccelerometerStdX 
@@ -197,6 +197,6 @@ A link to the source data file is given in the run_analysis.R script. The script
 Please see README.md file for more details.
 
 ### SANITY CHECK
- - performed on 2020-05-14 01:30:38 CDT
+ - Performed on 2020-05-14 01:30:38 CDT
 
 # THE END

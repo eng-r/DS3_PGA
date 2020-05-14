@@ -76,7 +76,7 @@ requirement. As mentioned, please use **Code Book** for details on transformatio
 - Used R version is version 3.6.3 (2020-02-29) [snapshot on **10-May-2020**]
 - Platform: x86_64-w64-mingw32
 - R-Studio @ Windows 10 machine: Version 1.2.5042
-- Attached packages used during the R-Studio session [you need to insatll them if you don't have it]:
+- Attached packages used during the R-Studio session [you need to install them if you don't have it]:
 	- dplyr_0.8.5
 	- magrittr_1.5
 	- stringr_1.4.0
